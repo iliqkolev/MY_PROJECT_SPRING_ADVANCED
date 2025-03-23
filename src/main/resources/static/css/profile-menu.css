@@ -1,0 +1,263 @@
+/* топ бар*/
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414; /* Netflix-style dark background */
+    color: white;
+}
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    z-index: 1000;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.my-chill-zone-nav-bar {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Логото е най-вляво */
+}
+.my-chill-zone-logo {
+    color: #e50914; /* Netflix red */
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.my-chill-zone-logo-under{
+    color: #e50914; /* Netflix red */
+    font-size: 37px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin: 2px -30px -47px -96px;
+}
+
+
+.func-block {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: -11px -8px -17px 107px;
+}
+.func-block a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+.func-block a:hover {
+    color: #e50914; /* Netflix red on hover */
+}
+.logout {
+    margin-left: auto; /* Бутонът за изход е най-вдясно */
+    margin: -17px -1px 2px 0px
+}
+.logout a {
+    color: white;
+    text-decoration: none;
+    background-color: #e50914; /* Netflix red */
+    border-radius: 24px;
+    transition: background-color 0.3s;
+}
+
+main {
+    padding-top: 72px /* Отстъп за навигационната лента */
+}
+
+a.button.logout{
+    top: 50px;
+    right: 14px;
+    position: fixed;
+    padding: 10px 16px;
+}
+
+.button{
+    display: inline-block;
+    appearance: none;
+    background-color: red;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 0.8;
+    color: #fff;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.04em;
+    border-radius: 40px;
+    box-shadow: inset 0 1px 9px rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+/* Контейнер за секцията */
+.home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Основен контейнер за профила */
+.single-section-box.profile-menu {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Заглавие на профила */
+.profile-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.profile-header .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header .profile-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Детайли на профила */
+.details-section {
+    background: #d5d4d4;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.details-section-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.details-section-container strong {
+    color: black;
+    font-weight: 500;
+}
+
+.details-section-container p {
+    color: #333;
+    margin: 0;
+}
+
+/* Форма */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.form label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form input:focus {
+    border-color: #679fff;
+    box-shadow: 0 0 8px rgba(103, 159, 255, 0.3);
+    outline: none;
+}
+
+.form select {
+    width: 105%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form select:focus {
+    border-color: #679fff;
+    box-shadow: 0 0 8px rgba(103, 159, 255, 0.3);
+    outline: none;
+}
+
+/* Бутон за запазване */
+.profile-actions-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 250px;
+    height: 50px;
+
+
+}
+
+.profile-actions-button:hover {
+    background: #b2070f;
+    transform: translateY(-2px);
+}
+
+.profile-actions-button:active {
+    transform: translateY(0); /* Връщане към нормално положение при клик */
+}
+
+.profile-actions-button svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Предупреждения */
+.alert-warning {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.alert-warning.active {
+    display: block;
+}
+
+.footer {
+    text-align: center;
+    background-color: #141414; /* Същия фон като на главната част */
+    color: rgba(255, 255, 255, 0.69);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

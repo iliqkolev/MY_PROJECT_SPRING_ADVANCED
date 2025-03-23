@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/subscription-history.css">
+
+
+    <title>Subscription History</title>
+</head>
+<body>
+
+<main>
+    <div class="nav-bar">
+        <div class="top-bar-container">
+            <nav>
+                <div class="top-navbar">
+                    <div class="my-chill-zone-nav-bar">
+                        <div class="my-chill-zone-logo">MyChill</div>
+                        <div class="my-chill-zone-logo-under">Zone</div>
+                    </div>
+                    <div class="func-block">
+                        <a href="/home">
+                            <p>Home</p>
+                        </a>
+
+                        <a href="/profile">
+                            <p>Profile</p>
+                        </a>
+
+                        <a href="/subscriptions">
+                            <p>Upgrade Plan</p>
+                        </a>
+
+                        <a href="/transfers">
+                            <p>Wallet</p>
+                        </a>
+
+                        <a href="/transactions">
+                            <p>Transactions</p>
+                        </a>
+
+                        <a href="/subscriptions/history">
+                            <p>Subscription History</p>
+                        </a>
+
+                        <a href="/users">
+                            <p>Contacts</p>
+                        </a>
+
+                        <a href="/users">
+                            <p>Users</p>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <div class="logout">
+                <a href="/logout" class="button logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!--  Subscription History -->
+
+    <div class="home-section">
+        <div class="single-section-box subscriptions-container">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Period</th>
+                    <th>Price</th>
+                    <th>Effective from</th>
+                    <th>Effective to</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--                <tr th:each="subscription : ${user.subscriptions}">-->
+                <!--                    <td th:text="${subscription.id}"></td>-->
+                <!--                    <td>-->
+                <!--                        <p th:text="${subscription.type}"></p>-->
+                <!--                    </td>-->
+                <!--                    <td>-->
+                <!--                        <p th:if="${subscription.status.name() == 'ACTIVE'}" class="status active">ACTIVE</p>-->
+                <!--                        <p th:if="${subscription.status.name() == 'COMPLETED'}" class="status completed">COMPLETED</p>-->
+                <!--                        <p th:if="${subscription.status.name() == 'TERMINATED'}" class="status terminated">TERMINATED</p>-->
+                <!--                    </td>-->
+                <!--                    <td th:text="${subscription.period}"></td>-->
+                <!--                    <td th:text="${subscription.price + ' EUR'}"></td>-->
+                <!--                    <td th:text="${#temporals.format(subscription.createdOn, 'dd MMM YYYY HH:mm')}"></td>-->
+                <!--                    <td th:text="${#temporals.format(subscription.completedOn, 'dd MMM YYYY HH:mm')}"></td>-->
+                <!--                </tr>-->
+                <tr>
+                    <td>2392-5a95-56lkh</td>
+                    <td>PREMIUM</td>
+                    <td class="status active">ACTIVE</td>
+                    <td>MONTHLY</td>
+                    <td>20</td>
+                    <td>18.02.2025</td>
+                    <td>18.03.2025</td>
+                </tr>
+                <tr>
+                    <td>2392-5a95-56lkh</td>
+                    <td>PREMIUM</td>
+                    <td class="status completed">ACTIVE</td>
+                    <td>MONTHLY</td>
+                    <td>20</td>
+                    <td>18.02.2025</td>
+                    <td>18.03.2025</td>
+                </tr>
+                <tr>
+                    <td>2392-5a95-56lkh</td>
+                    <td>PREMIUM</td>
+                    <td class="status terminated">ACTIVE</td>
+                    <td>MONTHLY</td>
+                    <td>20</td>
+                    <td>18.02.2025</td>
+                    <td>18.03.2025</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414; /* Netflix-style dark background */
+    color: white;
+}
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    z-index: 1000;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.my-chill-zone-nav-bar {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Логото е най-вляво */
+}
+.my-chill-zone-logo {
+    color: #e50914; /* Netflix red */
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.my-chill-zone-logo-under {
+    color: #e50914; /* Netflix red */
+    font-size: 37px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin: 2px -30px -47px -96px;
+}
+.func-block {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: -11px -8px -17px 107px;
+}
+.func-block a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+.func-block a:hover {
+    color: #e50914; /* Netflix red on hover */
+}
+.logout {
+    margin-left: auto; /* Бутонът за изход е най-вдясно */
+    margin: -17px -1px 2px 0px;
+}
+.logout a {
+    color: white;
+    text-decoration: none;
+    background-color: #e50914; /* Netflix red */
+    border-radius: 24px;
+    transition: background-color 0.3s;
+}
+main {
+    padding-top: 72px; /* Отстъп за навигационната лента */
+}
+a.button.logout {
+    top: 50px;
+    right: 14px;
+    position: fixed;
+    padding: 10px 16px;
+}
+.button {
+    display: inline-block;
+    appearance: none;
+    background-color: red;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 0.8;
+    color: #fff;
+    letter-spacing: 0.04em;
+    border-radius: 40px;
+    box-shadow: inset 0 1px 9px rgba(255, 255, 255, 0.5);
+}
+
+.footer {
+    color: rgba(255, 255, 255, 0.69);
+    text-align: center;
+    margin-top: 165px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+
+/* UPGRADE-RESULT */
+
+.home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.payment-result-container {
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.payment-box {
+    color: white;
+}
+
+.payment-box .payment-header h2 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.payment-box .payment-header p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.payment-details {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.details .item {
+    color: #ccc;
+}
+
+.details .value {
+    color: white;
+}
+
+.details-section {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.profile-actions-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e50914;
+    border-radius: 24px;
+    transition: background-color 0.3s;
+}
+
+.profile-actions-button:hover {
+    background-color: #b20710;
+}
+
+
+.payment-box.not-found .payment-header .icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 223, 71, 0.8);
+    border: 1px solid rgba(255, 200, 50, 0.8);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+}
+
+.payment-box.internal-server-error .payment-header .icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff6767;
+    border: 1px solid rgba(255, 84, 84, 0.8);
+    box-shadow: 0 4px 8px rgba(255, 103, 103, 0.4);
+}

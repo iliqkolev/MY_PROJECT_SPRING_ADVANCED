@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <title>Home</title>
+</head>
+<body>
+
+<main>
+    <div class="nav-bar">
+        <div class="top-bar-container">
+            <nav>
+                <div class="top-navbar">
+                    <div class="my-chill-zone-nav-bar">
+                        <div class="my-chill-zone-logo">MyChill</div>
+                        <div class="my-chill-zone-logo-under">Zone</div>
+                    </div>
+                    <div class="func-block">
+                        <a th:href="@{/home}">
+                            <p>Home</p>
+                        </a>
+
+                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
+                            <p>Profile</p>
+                        </a>
+
+                        <a th:href="@{/subscriptions}">
+                            <p>Upgrade Plan</p>
+                        </a>
+
+                        <a th:href="@{/transfers}">
+                            <p>Wallet</p>
+                        </a>
+
+                        <a th:href="@{/transactions}">
+                            <p>Transactions</p>
+                        </a>
+
+                        <a th:href="@{/subscriptions/history}">
+                            <p>Subscription History</p>
+                        </a>
+
+                        <a th:href="@{/contacts}">
+                            <p>Contacts</p>
+                        </a>
+
+                        <a th:href="@{/users}">
+                            <p>Users</p>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <div class="logout">
+                <a th:href="@{/logout}" class="button logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="trailer">
+        <video autoplay muted controls src="/images/PrisonBreakS1.mp4">
+            Your browser does not support this video
+        </video>
+    </div>
+
+    <div class="trending-now">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="trending-container">
+            <button class="scroll-button left-button">&larr;</button>
+            <div class="trending-grid">
+                <div class="trending-item">
+                    <img src="/images/Formula_1_Drive_to_Survive.jpg">
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Squad_Game_2.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Cobra_Kai_S4.jpg">
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Prison_Break_S1.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Breaking_Bad.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Blacklist.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Arrow.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/FBI.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/The_Night_Agent.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/The_100.jpg" >
+                </div>
+            </div>
+            <button class="scroll-button right-button">&rarr;</button> <!-- Стрелка надясно -->
+        </div>
+    </div>
+
+
+    <script>
+        const trendingGrid = document.querySelector('.trending-grid');
+        const leftButton = document.querySelector('.left-button');
+        const rightButton = document.querySelector('.right-button');
+
+        // Скролване надясно
+        rightButton.addEventListener('click', () => {
+            trendingGrid.scrollBy({
+                left: 300, // Скролване с 300px надясно
+                behavior: 'smooth' // Плавно скролване
+            });
+        });
+
+        // Скролване наляво
+        leftButton.addEventListener('click', () => {
+            trendingGrid.scrollBy({
+                left: -300, // Скролване с 300px наляво
+                behavior: 'smooth' // Плавно скролване
+            });
+        });
+
+        const checkScroll = () => {
+            if (trendingGrid.scrollLeft === 0) {
+                leftButton.style.display = 'none'; // Скриване на лявата стрелка
+            } else {
+                leftButton.style.display = 'flex'; // Показване на лявата стрелка
+            }
+
+            if (trendingGrid.scrollLeft + trendingGrid.clientWidth >= trendingGrid.scrollWidth) {
+                rightButton.style.display = 'none'; // Скриване на дясната стрелка
+            } else {
+                rightButton.style.display = 'flex'; // Показване на дясната стрелка
+            }
+        };
+
+        trendingGrid.addEventListener('scroll', checkScroll);
+        checkScroll(); // Проверка при зареждане на страницата
+    </script>
+
+</main>
+<div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
+</body>
+</html>

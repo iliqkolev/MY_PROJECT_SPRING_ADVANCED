@@ -53,6 +53,17 @@ public class SubscriptionController {
         return "redirect:/transactions/" + upgradeResult.getId();
     }
 
+    @GetMapping("/history")
+    public ModelAndView getUserSubscriptionsHistory(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata){
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("subscription-history");
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
+
 
 
 }

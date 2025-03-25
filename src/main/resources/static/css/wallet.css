@@ -220,4 +220,12 @@ main {
 .amount-out {
     color: red;
 }
+
+.footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.69);
+    position: relative;
+    width: 100%;
+    margin-top: 31px;
+}
           

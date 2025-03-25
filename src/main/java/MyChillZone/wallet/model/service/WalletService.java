@@ -16,9 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Currency;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -108,8 +106,73 @@ public class WalletService {
                 null
         );
     }
-    private Wallet getWalletById(UUID walletId) {
+
+    @Transactional
+    public Transaction topUp(UUID walletId, BigDecimal amount) {
+        Wallet wallet = getWalletById(walletId);
+        String transactionDescription = "Top up %.2f".formatted(amount.doubleValue());
+
+        if (wallet.getStatus() == WalletStatus.INACTIVE){
+
+            return transactionService.createNewTransaction(wallet.getOwner(),
+                    MY_CHILL_ZONE,
+                    walletId.toString(),
+                    amount,
+                    wallet.getBalance(),
+                    wallet.getCurrency(),
+                    TransactionType.DEPOSIT,
+                    TransactionStatus.FAILED,
+                    transactionDescription,
+                    "Inactive wallet");
+        }
+
+        wallet.setBalance(wallet.getBalance().add(amount));
+        wallet.setUpdatedOn(LocalDateTime.now());
+
+        walletRepository.save(wallet);
+
+        return transactionService.createNewTransaction(wallet.getOwner(),
+                MY_CHILL_ZONE,
+                walletId.toString(),
+                amount,
+                wallet.getBalance(),
+                wallet.getCurrency(),
+                TransactionType.DEPOSIT,
+                TransactionStatus.SUCCEEDED,
+                transactionDescription,
+                null);
+    }
+    public void switchStatus(UUID walletId, UUID ownerId) {
+
+        Optional<Wallet> optionalWallet = walletRepository.findByIdAndOwnerId(walletId, ownerId);
+        if (optionalWallet.isEmpty()){
+            throw new DomainException("Wallet with id [%s] does not belong to user with id [%s]".formatted(walletId, ownerId));
+        }
+
+        Wallet wallet = optionalWallet.get();
+        if (wallet.getStatus() == WalletStatus.ACTIVE){
+            wallet.setStatus(WalletStatus.INACTIVE);
+        }else{
+            wallet.setStatus(WalletStatus.ACTIVE);
+        }
+
+        walletRepository.save(wallet);
+    }
+    public Map<UUID, List<Transaction>> getLastFourTransactions(List<Wallet> wallets) {
+        Map<UUID, List<Transaction>> transactionsByWalletId = new HashMap<>();
+
+        for (Wallet wallet : wallets){
+            List<Transaction> lastFourTransactions = transactionService.getLastFourTransactionsByWallet(wallet);
+            transactionsByWalletId.put(wallet.getId(), lastFourTransactions);
+        }
+
+        return transactionsByWalletId;
+    }
+    public Wallet getWalletById(UUID walletId) {
         return walletRepository.findById(walletId)
                 .orElseThrow(() -> new DomainException("Wallet with id [%s] does not exist.".formatted(walletId)));
     }
+
+
+
 }

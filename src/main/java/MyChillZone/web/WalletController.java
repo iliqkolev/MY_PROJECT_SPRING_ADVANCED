@@ -1,4 +1,4 @@
-package MyChillZone.web.mapper;
+package MyChillZone.web;
 
 import MyChillZone.security.AuthenticationMetadata;
 import MyChillZone.transaction.model.Transaction;

@@ -1,5 +1,6 @@
 package MyChillZone.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableMethodSecurity
 public class WebMvcConfiguration implements WebMvcConfigurer {
-
 
     //SecurityFilterChain- начин ,по който Sring Security разбира как да се прилага за нашето приложение
     @Bean
@@ -35,7 +35,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //                        .usernameParameter("username")
 //                        .passwordParameter("password")
                         .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login?error")
+                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))

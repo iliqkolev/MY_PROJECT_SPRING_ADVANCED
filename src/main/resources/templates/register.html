@@ -19,6 +19,7 @@
         <div class="input-box">
             <input type="text" placeholder="Username" id="username" th:field="*{username}" required>
             <p class="alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <p class="alert-warning" th:text="${usernameAlreadyExistMessage}"></p>
             <i class='bx bxs-user'></i>
         </div>
         <div class="input-box">

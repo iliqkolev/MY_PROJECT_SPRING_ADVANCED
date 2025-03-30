@@ -145,7 +145,7 @@ body{
     font-weight: 300;
     font-size: 14px;
     letter-spacing: 0.5px;
-    background: #00f3ff;
+    background: #00ff50;
     background-size: 200%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -157,7 +157,7 @@ p.alert-warning {
     font-weight: 300;
     font-size: 14px;
     letter-spacing: 0.5px;
-    background: #00f3ff;
+    background: #00ff50;
     background-size: 200%;
     background-clip: text;
     -webkit-background-clip: text;

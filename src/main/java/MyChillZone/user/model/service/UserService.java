@@ -1,6 +1,7 @@
 package MyChillZone.user.model.service;
 
 import MyChillZone.exception.DomainException;
+import MyChillZone.exception.UsernameAlreadyExistException;
 import MyChillZone.security.AuthenticationMetadata;
 import MyChillZone.subscription.model.Subscription;
 import MyChillZone.subscription.model.service.SubscriptionService;
@@ -49,7 +50,7 @@ public class UserService implements UserDetailsService {
 
         Optional<User> userOptional = userRepository.findByUsername(registerRequest.getUsername());
         if (userOptional.isPresent()){
-            throw new UsernameNotFoundException("Username [%s] already exist.".formatted(registerRequest.getUsername()));
+            throw new UsernameAlreadyExistException("Username [%s] already exist.".formatted(registerRequest.getUsername()));
         }
 
         User user =userRepository.save(initializeUser(registerRequest));
@@ -89,10 +90,16 @@ public class UserService implements UserDetailsService {
     }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with this username does not exist"));
-
+        User user = getByUsername(username);
         return new AuthenticationMetadata(user.getId(), username, user.getPassword(), user.getUserRole(), user.isActive());
+
     }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new DomainException("User with this username does not exist"));
+    }
+
 
     public void editUserProfile(UUID userId, UserEditRequest userEditRequest) {
 
@@ -104,6 +111,13 @@ public class UserService implements UserDetailsService {
         user.setCountry(Country.valueOf(userEditRequest.getCountry()));
         user.setProfilePicture(userEditRequest.getProfilePicture());
         user.setUpdatedOn(LocalDateTime.now());
+
+
+//        if (!userEditRequest.getEmail().isBlank()){
+//            notificationService.saveNotificationPreference(userId, true, userEditRequest.getEmail());
+//        }else {
+//            notificationService.saveNotificationPreference(userId, false, null);
+//        }
 
         userRepository.save(user);
     }

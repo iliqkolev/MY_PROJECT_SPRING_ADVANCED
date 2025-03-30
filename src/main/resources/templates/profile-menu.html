@@ -18,35 +18,35 @@
                         <div class="my-chill-zone-logo-under">Zone</div>
                     </div>
                     <div class="func-block">
-                        <a href="/home">
+                        <a th:href="@{/home}">
                             <p>Home</p>
                         </a>
 
-                        <a href="/profile">
+                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
                             <p>Profile</p>
                         </a>
 
-                        <a href="/subscriptions">
+                        <a th:href="@{/subscriptions}">
                             <p>Upgrade Plan</p>
                         </a>
 
-                        <a href="/transfers">
+                        <a th:href="@{/wallet}">
                             <p>Wallet</p>
                         </a>
 
-                        <a href="/transactions">
+                        <a th:href="@{/transactions}">
                             <p>Transactions</p>
                         </a>
 
-                        <a href="/subscriptions/history">
+                        <a th:href="@{/subscriptions/history}">
                             <p>Subscription History</p>
                         </a>
 
-                        <a href="/users">
+                        <a th:href="@{/contacts}">
                             <p>Contacts</p>
                         </a>
 
-                        <a href="/users">
+                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
                             <p>Users</p>
                         </a>
                     </div>

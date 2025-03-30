@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/users.css">
+    <title>Users</title>
+</head>
+<main>
+    <div class="nav-bar">
+        <div class="top-bar-container">
+            <nav>
+                <div class="top-navbar">
+                    <div class="my-chill-zone-nav-bar">
+                        <div class="my-chill-zone-logo">MyChill</div>
+                        <div class="my-chill-zone-logo-under">Zone</div>
+                    </div>
+                    <div class="func-block">
+                        <a th:href="@{/home}">
+                            <p>Home</p>
+                        </a>
+
+                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
+                            <p>Profile</p>
+                        </a>
+
+                        <a th:href="@{/subscriptions}">
+                            <p>Upgrade Plan</p>
+                        </a>
+
+                        <a th:href="@{/wallet}">
+                            <p>Wallet</p>
+                        </a>
+
+                        <a th:href="@{/transactions}">
+                            <p>Transactions</p>
+                        </a>
+
+                        <a th:href="@{/subscriptions/history}">
+                            <p>Subscription History</p>
+                        </a>
+
+                        <a th:href="@{/contacts}">
+                            <p>Contacts</p>
+                        </a>
+
+                        <a th:href="@{/users}">
+                            <p>Users</p>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <div class="logout">
+                <a th:href="@{/logout}" class="button logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="home-section">
+        <div class="single-section-box subscriptions-container">
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Country</th>
+                    <th>Status</th>
+                    <th>Created on</th>
+                    <th>Switch status</th>
+                    <th>Change role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="currentUser : ${users}">
+                    <td th:text="${currentUser.id}"></td>
+                    <td th:text="${currentUser.username}"></td>
+                    <td th:text="${#strings.isEmpty(currentUser.email) ? 'no email' : currentUser.email}"></td>
+                    <td th:text="${#strings.capitalize(#strings.toLowerCase(currentUser.getUserRole()))}"></td>
+                    <td th:text="${#strings.capitalize(#strings.toLowerCase(currentUser.country))}"></td>
+                    <td>
+                        <p th:if="${currentUser.active}" class="status active">Active</p>
+                        <p th:if="${!currentUser.active}" class="status terminated">Inactive</p>
+                    </td>
+                    <td th:text="${#temporals.format(currentUser.createdOn, 'dd MMM YYYY  HH:mm')}"></td>
+                    <td>
+                        <!-- /users/{id}/status     -->
+                        <form th:action="@{'/users/' + ${currentUser.id} + '/status'}" th:method="PUT">
+                            <button class="profile-actions-button">
+                                <p>Status</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                     class="bi bi-toggle-on" viewBox="0 0 16 16">
+                                    <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <!-- /users/{id}/role     -->
+                        <form th:action="@{'/users/' + ${currentUser.id} + '/role'}" th:method="PUT">
+                            <button class="profile-actions-button">
+                                <p>Role</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                     class="bi bi-toggle-on" viewBox="0 0 16 16">
+                                    <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
+
+</html>

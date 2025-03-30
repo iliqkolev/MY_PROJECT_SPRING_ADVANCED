@@ -78,8 +78,10 @@ public class IndexController {
 
     @GetMapping("/contacts")
     public ModelAndView getContactPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata){
+        User user = userService.getById(authenticationMetadata.getUserId());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("contact-us");
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 }

@@ -1,5 +1,6 @@
 package MyChillZone.web;
 
+import MyChillZone.security.AuthenticationMetadata;
 import MyChillZone.user.model.User;
 import MyChillZone.user.model.service.UserService;
 import MyChillZone.web.dto.UserEditRequest;
@@ -7,6 +8,7 @@ import MyChillZone.web.mapper.DtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,13 +33,14 @@ public class UserController {
 
     @GetMapping()
     @PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView getAllUsers(){
-
+    public ModelAndView getAllUsers(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata){
         List<User> users = userService.getAllUsers();
+        User user = userService.getById(authenticationMetadata.getUserId());
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("users");
         modelAndView.addObject("users", users);
+        modelAndView.addObject("user", user);
 
         return  modelAndView;
     }
@@ -72,6 +75,23 @@ public class UserController {
         userService.editUserProfile(id, userEditRequest);
 
         return new ModelAndView("redirect:/home");
+    }
+
+    @PutMapping("/{id}/status")
+    public String switchUserStatus(@PathVariable UUID id){
+
+        userService.switchStatus(id);
+
+        return  "redirect:/users";
+    }
+
+
+    @PutMapping("/{id}/role")
+    public String switchUserRole(@PathVariable UUID id){
+
+        userService.switchRole(id);
+
+        return  "redirect:/users";
     }
 
 

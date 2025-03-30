@@ -47,7 +47,7 @@
                             <p>Contacts</p>
                         </a>
 
-                        <a th:href="@{/users}">
+                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
                             <p>Users</p>
                         </a>
                     </div>

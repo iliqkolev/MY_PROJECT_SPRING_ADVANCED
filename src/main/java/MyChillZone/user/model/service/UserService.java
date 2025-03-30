@@ -81,7 +81,10 @@ public class UserService implements UserDetailsService {
     }
     public User getById(UUID userId) {
 
-        return userRepository.findById(userId).orElseThrow(()-> new DomainException("User with id [%s] does not exist".formatted(userId)));
+        Optional<User> user = userRepository.findById(userId);
+        user.orElseThrow(()-> new DomainException("User with id [%s] does not exist".formatted(userId)));
+
+        return user.get();
 
     }
     @Override
@@ -107,5 +110,25 @@ public class UserService implements UserDetailsService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void switchStatus(UUID userId) {
+        User user = getById(userId);
+
+       user.setActive(!user.isActive());
+       userRepository.save(user);
+    }
+
+    public void switchRole(UUID userId) {
+
+        User user = getById(userId);
+
+        if (user.getUserRole() == UserRole.USER){
+            user.setUserRole(UserRole.ADMIN);
+        }else{
+            user.setUserRole(UserRole.USER);
+        }
+
+        userRepository.save(user);
     }
 }

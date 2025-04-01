@@ -1,15 +1,13 @@
 package MyChillZone.transaction.model.service;
 
 import MyChillZone.exception.DomainException;
+import MyChillZone.notification.client.service.NotificationService;
 import MyChillZone.transaction.model.Transaction;
 import MyChillZone.transaction.model.TransactionStatus;
 import MyChillZone.transaction.model.TransactionType;
 import MyChillZone.transaction.model.repository.TransactionRepository;
 import MyChillZone.user.model.User;
 import MyChillZone.wallet.model.Wallet;
-import MyChillZone.wallet.model.service.WalletService;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,9 +21,11 @@ import java.util.stream.Collectors;
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final NotificationService notificationService;
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, NotificationService notificationService) {
         this.transactionRepository = transactionRepository;
+        this.notificationService = notificationService;
     }
 
     public Transaction createNewTransaction(User owner, String sender, String receiver, BigDecimal transactionAmount, BigDecimal balanceLeft, Currency currency, TransactionType type, TransactionStatus status, String transactionDescription, String failureReason) {
@@ -45,7 +45,7 @@ public class TransactionService {
                 .build();
 
         String emailBody = "%s transaction was successfully processed for you with amount %.2f EUR".formatted(transaction.getType(), transaction.getAmount());
-//        notificationService.sendNotification(transaction.getOwner().getId(), "New Smart Wallet Transaction", emailBody);
+        notificationService.sendNotification(transaction.getOwner().getId(), "MyChillZone Transaction", emailBody);
 
         return transactionRepository.save(transaction);
     }

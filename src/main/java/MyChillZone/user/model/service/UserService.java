@@ -2,6 +2,7 @@ package MyChillZone.user.model.service;
 
 import MyChillZone.exception.DomainException;
 import MyChillZone.exception.UsernameAlreadyExistException;
+import MyChillZone.notification.client.service.NotificationService;
 import MyChillZone.security.AuthenticationMetadata;
 import MyChillZone.subscription.model.Subscription;
 import MyChillZone.subscription.model.service.SubscriptionService;
@@ -35,13 +36,15 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final SubscriptionService subscriptionService;
     private final WalletService walletService;
+    private final NotificationService notificationService;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SubscriptionService subscriptionService, WalletService walletService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SubscriptionService subscriptionService, WalletService walletService, NotificationService notificationService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.subscriptionService = subscriptionService;
         this.walletService = walletService;
+        this.notificationService = notificationService;
     }
 
 
@@ -61,8 +64,12 @@ public class UserService implements UserDetailsService {
         Wallet defaultWallet = walletService.createDefaultWallet(user);
         user.setWallets(List.of(defaultWallet));
 
-        //Persist new notification for a new user -> disabled
-//        notificationService.saveNotificationPreference(user.getId(), false, null);
+
+        notificationService.saveNotificationPreference(user.getId(), true, user.getEmail());
+
+        String emailBody = "Hey movie lover! \uD83C\uDFA5✨ myChillZone = ANY film you crave! Action\uD83D\uDCA5, Romance\uD83D\uDC96, Comedy\uD83D\uDE02, Horror\uD83D\uDC7B, Sci-Fi\uD83D\uDE80, Drama\uD83C\uDFAD. Popcorn ready? PLAY!";
+        notificationService.sendNotification(user.getId(), "Welcome to MyChillZone", emailBody);
+
 
         log.info("Successfully created new user account for username [%s] and id [%s]".formatted(user.getUsername(), user.getId()));
 
@@ -113,11 +120,11 @@ public class UserService implements UserDetailsService {
         user.setUpdatedOn(LocalDateTime.now());
 
 
-//        if (!userEditRequest.getEmail().isBlank()){
-//            notificationService.saveNotificationPreference(userId, true, userEditRequest.getEmail());
-//        }else {
-//            notificationService.saveNotificationPreference(userId, false, null);
-//        }
+        if (userEditRequest.getEmail().isBlank()){
+            notificationService.saveNotificationPreference(userId, false, "Edit an email if you want go receive");
+        }else {
+            notificationService.saveNotificationPreference(userId, true, userEditRequest.getEmail());
+        }
 
         userRepository.save(user);
     }

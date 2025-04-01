@@ -9,9 +9,11 @@ import MyChillZone.user.model.User;
 import MyChillZone.wallet.model.Wallet;
 import MyChillZone.wallet.model.WalletStatus;
 import MyChillZone.wallet.model.repository.WalletRepository;
+import MyChillZone.web.dto.PaymentNotificationEvent;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,11 +26,13 @@ public class WalletService {
     private final static String MY_CHILL_ZONE="MyChillZone";
     private final WalletRepository walletRepository;
     private final TransactionService transactionService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
-    public WalletService(WalletRepository walletRepository, TransactionService transactionService) {
+    public WalletService(WalletRepository walletRepository, TransactionService transactionService, ApplicationEventPublisher eventPublisher) {
         this.walletRepository = walletRepository;
         this.transactionService = transactionService;
+        this.eventPublisher = eventPublisher;
     }
 
     public Wallet createDefaultWallet(User user) {
@@ -92,6 +96,17 @@ public class WalletService {
         wallet.setUpdatedOn(LocalDateTime.now());
 
         walletRepository.save(wallet);
+
+
+        System.out.printf("Thread [%s]: Code in WalletService.class\n", Thread.currentThread().getName());
+        PaymentNotificationEvent event = PaymentNotificationEvent.builder()
+                .userId(user.getId())
+                .paymentTime(LocalDateTime.now())
+                .email(user.getEmail())
+                .amount(amount)
+                .build();
+
+         eventPublisher.publishEvent(event);
 
         return transactionService.createNewTransaction(
                 user,

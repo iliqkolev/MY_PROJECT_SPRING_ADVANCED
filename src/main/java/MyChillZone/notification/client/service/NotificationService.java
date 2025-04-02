@@ -77,4 +77,13 @@ public class NotificationService {
             log.warn("Can't send email to user with id = [%s] due to 500 Internal Server Error.".formatted(userId));
         }
     }
+
+    public void updateNotificationPreference(UUID userId, boolean enabled) {
+
+        try {
+        notificationClient.updateNotificationPreference(userId, enabled);
+        }catch (Exception e){
+            log.warn("Can't update notification preferences for user with id = [%s].".formatted(userId));
+        }
+    }
 }

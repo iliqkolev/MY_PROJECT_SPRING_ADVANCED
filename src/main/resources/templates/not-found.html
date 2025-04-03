@@ -23,7 +23,7 @@
                             <p>Home</p>
                         </a>
 
-                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
+                        <a>
                             <p>Profile</p>
                         </a>
 
@@ -52,7 +52,7 @@
                             <p>Contacts</p>
                         </a>
 
-                        <a th:href="@{/users}" th:if="${user.getUserRole().name == 'ADMIN'}">
+                        <a>
                             <p>Users</p>
                         </a>
                     </div>

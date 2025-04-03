@@ -47,18 +47,18 @@ public class ExceptionAdvice {
             MethodArgumentTypeMismatchException.class,
             MissingRequestValueException.class
     })
-    public ModelAndView handleNotFoundExceptions(){ return new ModelAndView("not-found");}
+    public ModelAndView handleNotFoundExceptions(Exception exception, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata){
+
+        return new ModelAndView("not-found");
+    }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleAnyExceptions(Exception e, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata){
-        UUID userId = authenticationMetadata.getUserId();
-        User user = userService.getById(userId);
+    public ModelAndView handleAnyExceptions(Exception e){
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("internal-server-error");
         modelAndView.addObject("errorMessage", e.getClass().getSimpleName());
-        modelAndView.addObject("user", user);
 
         return modelAndView;
     }

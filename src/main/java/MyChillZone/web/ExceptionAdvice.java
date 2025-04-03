@@ -1,9 +1,14 @@
 package MyChillZone.web;
 
 import MyChillZone.exception.UsernameAlreadyExistException;
+import MyChillZone.security.AuthenticationMetadata;
+import MyChillZone.user.model.User;
+import MyChillZone.user.model.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,8 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import java.util.UUID;
+
 @ControllerAdvice
 public class ExceptionAdvice {
+    private final UserService userService;
+
+    @Autowired
+    public ExceptionAdvice(UserService userService) {
+        this.userService = userService;
+    }
 
     @ExceptionHandler(UsernameAlreadyExistException.class)
     public String handleUserAlreadyExist(RedirectAttributes redirectAttributes, HttpServletRequest request){
@@ -38,10 +51,14 @@ public class ExceptionAdvice {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleAnyExceptions(Exception e){
+    public ModelAndView handleAnyExceptions(Exception e, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata){
+        UUID userId = authenticationMetadata.getUserId();
+        User user = userService.getById(userId);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("internal-server-error");
         modelAndView.addObject("errorMessage", e.getClass().getSimpleName());
+        modelAndView.addObject("user", user);
 
         return modelAndView;
     }

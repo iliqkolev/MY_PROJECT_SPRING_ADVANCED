@@ -38,12 +38,17 @@
                         <a th:href="@{/subscriptions/history}">
                             <p>Subscription History</p>
                         </a>
+                        </a>
+
+                        <a th:href="@{/notifications}">
+                            <p>Notification</p>
+                        </a>
 
                         <a th:href="@{/contacts}">
                             <p>Contacts</p>
                         </a>
 
-                        <a th:href="@{/users}">
+                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
                             <p>Users</p>
                         </a>
                     </div>

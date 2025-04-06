@@ -137,7 +137,7 @@ body {
 .trending-item {
     position: relative;
     flex: 0 0 auto; /* Без разтягане на елементите */
-    width: 300px; /* Ширина на всеки елемент */
+    width: 187px; /* Ширина на всеки елемент */
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease;

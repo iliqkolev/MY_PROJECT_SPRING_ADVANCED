@@ -60,10 +60,8 @@ public class SubscriptionServiceUTest {
         when(subscriptionRepository.save(any()))
                 .thenReturn(expectedSubscription);
 
-        // Act
         Subscription result = subscriptionService.createDefaultSubscription(user);
 
-        // Assert
         assertNotNull(result);
         assertEquals(SubscriptionPeriod.MONTHLY, result.getPeriod());
         assertEquals(SubscriptionType.DEFAULT, result.getType());
@@ -78,7 +76,7 @@ public class SubscriptionServiceUTest {
 
     @Test
     void upgrade_ShouldSuccessfullyUpgradeMonthlyPremiumSubscription() {
-        // Arrange
+
         User user = User.builder().id(UUID.randomUUID()).build();
         Subscription currentSub = Subscription.builder()
                 .owner(user)
@@ -93,7 +91,7 @@ public class SubscriptionServiceUTest {
         when(walletService.charge(any(), any(), any(), any()))
                 .thenReturn(mockTransaction);
 
-        // Act
+
         Transaction result = subscriptionService.upgrade(
                 user,
                 SubscriptionType.PREMIUM,
@@ -102,8 +100,6 @@ public class SubscriptionServiceUTest {
                         .subscriptionPeriod(SubscriptionPeriod.MONTHLY)
                         .build());
 
-
-        // Assert
         assertEquals(TransactionStatus.SUCCEEDED, result.getStatus());
 
         verify(walletService).charge(

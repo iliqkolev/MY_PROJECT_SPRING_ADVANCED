@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/movies.css">
+    <title>Movies</title>
+</head>
+<body>
+
+<div class="nav-bar">
+    <div class="top-bar-container">
+        <nav>
+            <div class="top-navbar">
+                <div class="my-chill-zone-nav-bar">
+                    <div class="my-chill-zone-logo">MyChill</div>
+                    <div class="my-chill-zone-logo-under">Zone</div>
+                </div>
+                <div class="func-block">
+                    <a th:href="@{/home}">
+                        <p>Home</p>
+                    </a>
+                    <a th:href="@{/movies}">
+                        <p>Movies</p>
+                    </a>
+                    <a>
+                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
+                        <p>Profile</p>
+                    </a>
+
+                    <a th:href="@{/subscriptions}">
+                        <p>Upgrade Plan</p>
+                    </a>
+
+                    <a th:href="@{/wallet}">
+                        <p>Wallet</p>
+                    </a>
+
+                    <a th:href="@{/transactions}">
+                        <p>Transactions</p>
+                    </a>
+
+                    <a th:href="@{/subscriptions/history}">
+                        <p>Subscription History</p>
+                    </a>
+                    </a>
+
+                    <a th:href="@{/notifications}">
+                        <p>Notification</p>
+                    </a>
+
+                    <a th:href="@{/contacts}">
+                        <p>Contacts</p>
+                    </a>
+                    <a>
+                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
+                        <p>Users</p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <div class="logout">
+            <a th:href="@{/logout}" class="button logout">Logout</a>
+        </div>
+    </div>
+</div>
+
+
+<main>
+    <!--  ACTION  -->
+    <div class="genre-section">
+        <h3 class="genre-title">Action Movies</h3>
+        <div class="movies-container">
+
+            <div class="movie-card">
+                <img src="/images/movie/Batman_Begins.jpg" class="movie-poster" alt="Batman Begins">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Dark_Knight_Rises.jpg" class="movie-poster" alt="The Dark Knight Rises">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Batman.jfif" class="movie-poster" alt="The Batman">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Equalizer.jpg" class="movie-poster" alt="The Equalizer">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Equalizer_2.jpg" class="movie-poster" alt="The Equalizer 2">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Equalizer_3.png" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/John_Wick_.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/John_Wick_2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/John_Wick_3.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/John_Wick_4.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Mechanic.jfif" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Mechanic_Ressurection.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Transporter.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Transporter_2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Transporter_3.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Transporter_4.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Wild_Card.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Meg.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/The_Meg_2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/Wrath_of_Man.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/Beekeper.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/Operation_Fortune.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  COMEDY  -->
+    <div class="genre-section">
+        <h3 class="genre-title">Comedy Movies</h3>
+        <div class="movies-container">
+
+            <div class="movie-card">
+                <img src="/images/movie/Sam-vkyshti.jpg" class="movie-poster" alt="Batman Begins">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/sam-vkashti-2.jpg" class="movie-poster" alt="The Dark Knight Rises">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/sam-vkashti-3.jpg" class="movie-poster" alt="The Batman">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/sam-vkashti-4.jpg" class="movie-poster" alt="The Equalizer">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/vnedreni_v_chas.jpg" class="movie-poster" alt="The Equalizer 2">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/vnedreni-v-chas2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/ergenski.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/ergenski2.jfif" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/ergenski3.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/ergenksi4.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/agent-xxl.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/agent-xxl-2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/agent-xxl-3.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/norbit.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/rejeb.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/rejeb_2.jfif" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/regeb_3.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/rejeb_4.jfif" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/rejeb_5.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/rejeb_6.png" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/ted.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="/images/movie/ted_2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HORROR -->
+    <div class="genre-section">
+        <h3 class="genre-title">Horror Movies</h3>
+        <div class="movies-container">
+
+            <div class="movie-card">
+                <img src="/images/movie/The_exorcist.jpg" class="movie-poster" alt="Batman Begins">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Shining.jfif" class="movie-poster" alt="The Dark Knight Rises">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_Halloween.jpg" class="movie-poster" alt="The Batman">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/A%20Nightmare%20on%20Elm%20Street.jpg" class="movie-poster" alt="The Equalizer">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The_ring.jfif" class="movie-poster" alt="The Equalizer 2">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/A_quiet_place.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/hereditary.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Midsommar.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Anabel.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/conjurning.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/conjurning_2.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FANTASY -->
+    <div class="genre-section">
+        <h3 class="genre-title">Fantasy Movies</h3>
+        <div class="movies-container">
+
+            <div class="movie-card">
+                <img src="/images/movie/the_lord_of_the_rings.jpg" class="movie-poster" alt="Batman Begins">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Harry.jpg" class="movie-poster" alt="The Dark Knight Rises">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/game_of_thrones.jpg" class="movie-poster" alt="The Batman">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/The%20NeverEnding%20Story.jpg" class="movie-poster" alt="The Equalizer">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/cloud_atlas.jpg" class="movie-poster" alt="The Equalizer 2">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/A_quiet_place.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/dark_shadows.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Midsommar.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/dragonjpg.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/beauty.jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+
+            <div class="movie-card">
+                <img src="/images/movie/Dune_(2021_film).jpg" class="movie-poster" alt="The Equalizer 3">
+                <div class="movie-buttons">
+                    <button class="movie-button favourite">Favourite</button>
+                    <button class="movie-button like">Like</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Добавяме функционалност за бутоните
+        document.querySelectorAll('.favourite').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('.like').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+
+</main>
+
+</body>
+<div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
+</html>

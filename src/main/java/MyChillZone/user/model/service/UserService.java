@@ -17,6 +17,7 @@ import MyChillZone.web.dto.UserEditRequest;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -46,7 +47,6 @@ public class UserService implements UserDetailsService {
         this.walletService = walletService;
         this.notificationService = notificationService;
     }
-
 
     @Transactional
     public User register(RegisterRequest registerRequest) {

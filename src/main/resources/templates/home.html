@@ -22,7 +22,9 @@
                         <a th:href="@{/home}">
                             <p>Home</p>
                         </a>
-
+                        <a th:href="@{/movies}">
+                            <p>Movies</p>
+                        </a>
                         <a th:href="@{'/users/' + ${user.id} + '/profile'}">
                             <p>Profile</p>
                         </a>
@@ -107,6 +109,18 @@
                 </div>
                 <div class="trending-item">
                     <img src="/images/The_100.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Narcosjpg.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/The_Flash.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/Peaky_Blinders.jpg" >
+                </div>
+                <div class="trending-item">
+                    <img src="/images/The_Witcher.jpg" >
                 </div>
             </div>
             <button class="scroll-button right-button">&rarr;</button> <!-- Стрелка надясно -->

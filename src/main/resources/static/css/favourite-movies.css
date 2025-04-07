@@ -96,7 +96,7 @@ a.button.logout{
     letter-spacing: 0.5px;
 }
 
-/* MOVIES */
+/* FAVOURITE */
 
 .genre-section {
     margin-bottom: 40px;
@@ -133,42 +133,4 @@ a.button.logout{
 .movie-poster:hover {
     transform: scale(1.05);
     cursor: pointer;
-}
-
-.movie-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 5px;
-}
-
-.movie-button {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.3s;
-}
-
-.movie-button:hover {
-    background-color: #e50914;
-}
-
-.favourite {
-    background-color: #333;
-}
-
-.favourite.active {
-    background-color: #e50914;
-}
-
-.like {
-    background-color: #333;
-}
-
-.like.active {
-    background-color: #1DA1F2;
 }

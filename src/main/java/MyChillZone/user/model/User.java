@@ -1,5 +1,6 @@
 package MyChillZone.user.model;
 
+import MyChillZone.movie.model.Movie;
 import MyChillZone.subscription.model.Subscription;
 import MyChillZone.wallet.model.Wallet;
 import jakarta.persistence.*;
@@ -58,5 +59,19 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     @OrderBy("createdOn ASC")
     private List<Wallet> wallets = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_liked_movies",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private List<Movie> likedMovies;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_favourite_movies",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private List<Movie> favouriteMovies = new ArrayList<>();
 }
 

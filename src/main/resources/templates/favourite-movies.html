@@ -6,6 +6,7 @@
     <title>Favourite Movies</title>
 </head>
 <body>
+
 <div class="nav-bar">
     <div class="top-bar-container">
         <nav>
@@ -22,7 +23,10 @@
                         <p>Movies</p>
                     </a>
                     <a th:href="@{/movies/favourites}">
-                        <p>Movies</p>
+                        <p>Favourite Movies</p>
+                    </a>
+                    <a th:href="@{/movies/liked}">
+                        <p>Most Liked Movies</p>
                     </a>
                     <a>
                         <a th:href="@{'/users/' + ${user.id} + '/profile'}">
@@ -60,27 +64,38 @@
             </div>
         </nav>
 
-
-
         <div class="logout">
             <a th:href="@{/logout}" class="button logout">Logout</a>
         </div>
     </div>
 </div>
 
-<h2 class="genre-title">My Favourite Movies</h2>
-    <div class="movies-container" th:if="${#lists.isEmpty(movies)}">
-    <p>You don't have any favourites yet.</p>
+<main>
+
+    <div th:if="${favByGenre.size() == 0}">
+            <p class="main-message">You don't have any favourites yet.</p>
     </div>
 
-    <div class="movies-container" th:if="${not #lists.isEmpty(movies)}">
-    <div class="movie-card" th:each="movie : ${movies}">
-        <img th:src="@{${movie.imageUrl}}" th:alt="${movie.title}" class="movie-poster">
-        <p th:text="${movie.title}"></p>
-        <p><strong>Genre:</strong> <span th:text="${movie.genre}"></span></p>
+    <div th:if="${not #lists.isEmpty(favByGenre)}">
+    <div class="genre-section" th:each="entry :${favByGenre}">
+    <h3 th:if="${not #lists.isEmpty(entry.value)}" class="genre-title" th:text="${#strings.capitalize(entry.key.name().toLowerCase()) + ' Movies'}"></h3>
+
+    <div class="movies-container">
+        <div class="movie-card" th:each="movie : ${entry.value}">
+            <img th:src="@{${movie.imageUrl}}" class="movie-poster" th:alt="${movie.title}" >
+                <form th:action="@{'/movies/' + ${movie.id} + '/favourites/remove'}" th:method="DELETE" class="remove-fav-form">
+                    <button type="submit" class="remove-fav-btn" title="Remove from Favourites">
+                        <i class="fas fa-heart-broken"></i> Remove
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
     </div>
 
+
+
+</main>
 </body>
 <div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
 </html>

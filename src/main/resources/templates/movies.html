@@ -22,26 +22,32 @@
                     <a th:href="@{/movies}">
                         <p>Movies</p>
                     </a>
+                    <a th:href="@{/movies/favourites}">
+                        <p>Favourite Movies</p>
+                    </a>
+                    <a th:href="@{/movies/liked}">
+                        <p>Most Liked Movies</p>
+                    </a>
                     <a>
                         <a th:href="@{'/users/' + ${user.id} + '/profile'}">
-                        <p>Profile</p>
-                    </a>
+                            <p>Profile</p>
+                        </a>
 
-                    <a th:href="@{/subscriptions}">
-                        <p>Upgrade Plan</p>
-                    </a>
+                        <a th:href="@{/subscriptions}">
+                            <p>Upgrade Plan</p>
+                        </a>
 
-                    <a th:href="@{/wallet}">
-                        <p>Wallet</p>
-                    </a>
+                        <a th:href="@{/wallet}">
+                            <p>Wallet</p>
+                        </a>
 
-                    <a th:href="@{/transactions}">
-                        <p>Transactions</p>
-                    </a>
+                        <a th:href="@{/transactions}">
+                            <p>Transactions</p>
+                        </a>
 
-                    <a th:href="@{/subscriptions/history}">
-                        <p>Subscription History</p>
-                    </a>
+                        <a th:href="@{/subscriptions/history}">
+                            <p>Subscription History</p>
+                        </a>
                     </a>
 
                     <a th:href="@{/notifications}">
@@ -57,8 +63,6 @@
                 </div>
             </div>
         </nav>
-
-
 
         <div class="logout">
             <a th:href="@{/logout}" class="button logout">Logout</a>

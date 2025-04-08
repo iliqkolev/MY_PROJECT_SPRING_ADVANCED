@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/liked-movies.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Most Liked Movies</title>
 </head>
 <body>
@@ -71,6 +72,10 @@
 
 <main>
 
+    <div th:if="${likedByGenre.size() == 0}">
+        <p class="main-message">You don't have any favourites yet.</p>
+    </div>
+
     <div th:if="${not #lists.isEmpty(likedByGenre)}">
     <div class="genre-section" th:each="entry :${likedByGenre}">
     <h3 th:if="${not #lists.isEmpty(entry.value)}" class="genre-title" th:text="${#strings.capitalize(entry.key.name().toLowerCase()) + ' Movies'}">Action Movies</h3>
@@ -78,14 +83,13 @@
     <div class="movies-container">
         <div class="movie-card" th:each="movie : ${entry.value}">
             <img th:src="@{${movie.imageUrl}}" class="movie-poster" th:alt="${movie.title}"/>
-                <p th:text="'Likes ' + ${movie.getLikes()}"></p>
+            <div class="likes-line">
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span th:text="${movie.getLikes()}"></span>
+            </div>
             </div>
         </div>
     </div>
-
-        <div class="movies-container" th:if="${#lists.isEmpty(likedByGenre)}">
-        <p>You haven't  liked any movies.</p>
-        </div>
     </div>
 
 

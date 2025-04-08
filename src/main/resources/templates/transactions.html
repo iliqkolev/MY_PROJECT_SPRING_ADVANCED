@@ -22,26 +22,35 @@
                         <a th:href="@{/home}">
                             <p>Home</p>
                         </a>
-
-                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
-                            <p>Profile</p>
+                        <a th:href="@{/movies}">
+                            <p>Movies</p>
                         </a>
-
-                        <a th:href="@{/subscriptions}">
-                            <p>Upgrade Plan</p>
+                        <a th:href="@{/movies/favourites}">
+                            <p>Favourite Movies</p>
                         </a>
-
-                        <a th:href="@{/wallet}">
-                            <p>Wallet</p>
+                        <a th:href="@{/movies/liked}">
+                            <p>Most Liked Movies</p>
                         </a>
+                        <a>
+                            <a th:href="@{'/users/' + ${user.id} + '/profile'}">
+                                <p>Profile</p>
+                            </a>
 
-                        <a th:href="@{/transactions}">
-                            <p>Transactions</p>
-                        </a>
+                            <a th:href="@{/subscriptions}">
+                                <p>Upgrade Plan</p>
+                            </a>
 
-                        <a th:href="@{/subscriptions/history}">
-                            <p>Subscription History</p>
-                        </a>
+                            <a th:href="@{/wallet}">
+                                <p>Wallet</p>
+                            </a>
+
+                            <a th:href="@{/transactions}">
+                                <p>Transactions</p>
+                            </a>
+
+                            <a th:href="@{/subscriptions/history}">
+                                <p>Subscription History</p>
+                            </a>
                         </a>
 
                         <a th:href="@{/notifications}">
@@ -51,7 +60,6 @@
                         <a th:href="@{/contacts}">
                             <p>Contacts</p>
                         </a>
-
                         <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
                             <p>Users</p>
                         </a>
@@ -59,14 +67,11 @@
                 </div>
             </nav>
 
-
-
             <div class="logout">
-                <a href="/logout" class="button logout">Logout</a>
+                <a th:href="@{/logout}" class="button logout">Logout</a>
             </div>
         </div>
     </div>
-
     <!--  Transaction -->
 
     <div class="home-section">

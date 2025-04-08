@@ -61,4 +61,17 @@ public class MovieService {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
         return movie.getLikes();
     }
+
+    public void removeFavouriteMovie(UUID favouriteMovieId, UUID userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Movie movie = movieRepository.findById(favouriteMovieId)
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+
+        user.getFavouriteMovies().remove(movie);
+
+        userRepository.save(user);
+    }
 }

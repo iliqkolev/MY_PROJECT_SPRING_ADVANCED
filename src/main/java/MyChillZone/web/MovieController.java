@@ -11,10 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -67,26 +64,26 @@ public class MovieController {
         UUID userId = auth.getUserId();
         User user = userService.getById(userId);
 
-        List<Movie> movies = user.getFavouriteMovies();
+        List<Movie> favMovies = user.getFavouriteMovies();
 
         List<Genre> genreOrder = List.of(Genre.ACTION, Genre.COMEDY, Genre.HORROR, Genre.FANTASY);
 
-        Map<Genre, List<Movie>> grouped = movieService.getAllMovies()
+        Map<Genre, List<Movie>> favouriteMovies = favMovies
                 .stream()
                 .collect(Collectors.groupingBy(Movie::getGenre));
 
         // Подреждаме по custom ред
-        Map<Genre, List<Movie>> moviesByGenre = new LinkedHashMap<>();
+        Map<Genre, List<Movie>> sortedFavByGenre = new LinkedHashMap<>();
+
         for (Genre genre : genreOrder) {
-            if (grouped.containsKey(genre)) {
-                moviesByGenre.put(genre, grouped.get(genre));
+            if (favouriteMovies.containsKey(genre)) {
+                sortedFavByGenre.put(genre, favouriteMovies.get(genre));
             }
         }
 
         ModelAndView modelAndView = new ModelAndView("favourite-movies");
-        modelAndView.addObject("movies", movies);
         modelAndView.addObject("user", user);
-        modelAndView.addObject("moviesByGenre", moviesByGenre);
+        modelAndView.addObject("favByGenre", sortedFavByGenre);
 
         return modelAndView;
     }
@@ -106,7 +103,6 @@ public class MovieController {
                 .stream()
                 .collect(Collectors.groupingBy(Movie::getGenre));
 
-        // Подреждаме по custom ред
         Map<Genre, List<Movie>> sortedLikedByGenre  = new LinkedHashMap<>();
 
         for (Genre genre : genreOrder) {
@@ -137,6 +133,14 @@ public class MovieController {
         movieService.addMovieToLikes(id, a.getUserId());
 
         return "redirect:/movies";
+    }
+
+    @DeleteMapping("/{id}/favourites/remove")
+    public String removeFavouriteMovie(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata a){
+
+        movieService.removeFavouriteMovie(id, a.getUserId());
+
+        return "redirect:/movies/favourites";
     }
 
 

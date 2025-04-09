@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #141414; /* Netflix-style dark background */
+    color: white;
+}
+.nav-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    z-index: 1000;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+.my-chill-zone-nav-bar {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Логото е най-вляво */
+}
+.my-chill-zone-logo {
+    color: #e50914; /* Netflix red */
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.my-chill-zone-logo-under{
+    color: #e50914; /* Netflix red */
+    font-size: 37px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin: 2px -30px -47px -96px;
+}
+
+
+.func-block {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: -11px -8px -17px 107px;
+}
+.func-block a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+.func-block a:hover {
+    color: #e50914; /* Netflix red on hover */
+}
+.logout {
+    margin-left: auto; /* Бутонът за изход е най-вдясно */
+    margin: -17px -1px 2px 0px
+}
+.logout a {
+    color: white;
+    text-decoration: none;
+    background-color: #e50914; /* Netflix red */
+    border-radius: 24px;
+    transition: background-color 0.3s;
+}
+
+main {
+    padding-top: 72px /* Отстъп за навигационната лента */
+}
+
+a.button.logout{
+    top: 50px;
+    right: 14px;
+    position: fixed;
+    padding: 10px 16px;
+}
+
+.button{
+    display: inline-block;
+    appearance: none;
+    background-color: red;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 0.8;
+    color: #fff;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.04em;
+    border-radius: 40px;
+    box-shadow: inset 0 1px 9px rgba(255, 255, 255, 0.5);
+}
+
+.footer {
+    color: rgba(255, 255, 255, 0.69);
+    text-align: center;
+    margin-top: 418px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* SEARCH */
+.search-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 300px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #e50914; /* Netflix red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-container button:hover {
+    background-color: #f40612;
+}
+
+.search-results {
+    margin-top: 30px;
+}
+
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.movie-card {
+    background-color: #333;
+    width: 150px;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #e50914;
+}
+
+.movie-info {
+    padding: 10px;
+}
+
+.movie-info h4 {
+    font-size: 18px;
+    color: #e50914;
+}
+
+.movie-info p {
+    color: #fff;
+    font-size: 14px;
+}
+
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.no-results {
+    text-align: center;
+    padding: 10px;
+}
+

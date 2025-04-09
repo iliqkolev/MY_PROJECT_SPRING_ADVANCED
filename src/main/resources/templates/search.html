@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/movies.css">
-    <title>Movies</title>
+    <link rel="stylesheet" type="text/css" href="/css/search.css">
+    <title>Search</title>
 </head>
 <body>
 
@@ -31,6 +31,9 @@
                     <a th:href="@{'/users/' + ${user.id} + '/profile'}">
                         <p>Profile</p>
                     </a>
+                    <a th:href="@{/search}">
+                        <p>Search</p>
+                    </a>
 
 
 
@@ -55,48 +58,34 @@
     </div>
 </div>
 
-
 <main>
-    <!--  ACTION  -->
-    <div class="genre-section" th:each="entry :${moviesByGenre}">
-        <h3 class="genre-title" th:text="${#strings.capitalize(entry.key.name().toLowerCase()) + ' Movies'}">Action Movies</h3>
-        <div class="movies-container">
 
-            <div class="movie-card" th:each="movie : ${entry.value}">
-                <img th:src="@{${movie.imageUrl}}" class="movie-poster" th:alt="${movie.title}">
-                <div class="movie-buttons">
-                    <form th:action="@{'/movies/' + ${movie.id} + '/favourites'}" th:method="POST">
-                        <button class="movie-button favourite">Favourites
-                        </button>
+    <div class="search-container">
+        <h2>Search Movies</h2>
+        <form th:action="@{'/search/results'}" th:method="GET">
+            <input type="text" name="movie" placeholder="Enter movie name" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
 
-                    </form>
-                    <form th:action="@{'/movies/' + ${movie.id} + '/like'}" th:method="POST">
-                        <button class="movie-button like">Like
-                        </button>
-                    </form>
+    <div class="message-container">
+        <p th:if="${message}" class="no-results" th:text="${message}"></p>
+    </div>
+
+    <div class="search-results" th:if="${searchResults != null}">
+        <h3>Search Results for: <span th:text="${movie}"></span></h3>
+        <div class="results-container">
+            <div class="movie-card" th:each="m :${searchResults}">
+                <img th:src="@{${m.imageUrl}}" class="movie-poster" th:alt="${m.title}">
+                <div class="movie-info">
+                    <h4 th:text="${m.title}"></h4>
+                    <p th:text="'Genre: ' + ${m.genre}"></p>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <script>
-        // Добавяме функционалност за бутоните
-        document.querySelectorAll('.favourite').forEach(button => {
-            button.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
-        });
-
-        document.querySelectorAll('.like').forEach(button => {
-            button.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
-        });
-    </script>
-
 </main>
-
 </body>
 <div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
 </html>

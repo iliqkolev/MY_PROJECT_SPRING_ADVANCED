@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/movies.css">
-    <title>Movies</title>
+    <link rel="stylesheet" type="text/css" href="/css/search.css">
+    <title>Search Result</title>
 </head>
 <body>
-
 <div class="nav-bar">
     <div class="top-bar-container">
         <nav>
@@ -55,48 +54,28 @@
     </div>
 </div>
 
-
 <main>
-    <!--  ACTION  -->
-    <div class="genre-section" th:each="entry :${moviesByGenre}">
-        <h3 class="genre-title" th:text="${#strings.capitalize(entry.key.name().toLowerCase()) + ' Movies'}">Action Movies</h3>
-        <div class="movies-container">
 
-            <div class="movie-card" th:each="movie : ${entry.value}">
-                <img th:src="@{${movie.imageUrl}}" class="movie-poster" th:alt="${movie.title}">
-                <div class="movie-buttons">
-                    <form th:action="@{'/movies/' + ${movie.id} + '/favourites'}" th:method="POST">
-                        <button class="movie-button favourite">Favourites
-                        </button>
+    <div class="search-results-container">
+        <h2>Search Results</h2>
 
-                    </form>
-                    <form th:action="@{'/movies/' + ${movie.id} + '/like'}" th:method="POST">
-                        <button class="movie-button like">Like
-                        </button>
-                    </form>
+        <div th:if="${not #lists.isEmpty(movies)}">
+            <div class="genre-section" th:each="movie : ${movies}">
+                <div class="movie-card">
+                    <img th:src="@{${movie.imageUrl}}" alt="Movie Poster" class="movie-poster">
+                    <h3 th:text="${movie.title}"></h3>
+                    <p th:text="${movie.description}"></p>
+                    <div class="movie-genre" th:text="${movie.genre.name()}"></div>
                 </div>
             </div>
         </div>
+
+        <div th:if="${#lists.isEmpty(movies)}">
+            <p>No results found for your search.</p>
+        </div>
     </div>
 
-
-    <script>
-        // Добавяме функционалност за бутоните
-        document.querySelectorAll('.favourite').forEach(button => {
-            button.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
-        });
-
-        document.querySelectorAll('.like').forEach(button => {
-            button.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
-        });
-    </script>
-
 </main>
-
 </body>
 <div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
 </html>

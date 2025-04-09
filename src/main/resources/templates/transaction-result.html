@@ -1,152 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/transaction-result.css">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/transaction-result.css">-->
 
 
-    <title>Upgrade Result</title>
-</head>
-<body>
+<!--    <title>Upgrade Result</title>-->
+<!--</head>-->
+<!--<body>-->
 
-<main>
-    <div class="nav-bar">
-        <div class="top-bar-container">
-            <nav>
-                <div class="top-navbar">
-                    <div class="my-chill-zone-nav-bar">
-                        <div class="my-chill-zone-logo">MyChill</div>
-                        <div class="my-chill-zone-logo-under">Zone</div>
-                    </div>
-                    <div class="func-block">
-                        <a th:href="@{/home}">
-                            <p>Home</p>
-                        </a>
-                        <a th:href="@{/movies}">
-                            <p>Movies</p>
-                        </a>
-                        <a th:href="@{/movies/favourites}">
-                            <p>Favourite Movies</p>
-                        </a>
-                        <a th:href="@{/movies/liked}">
-                            <p>Most Liked Movies</p>
-                        </a>
-                        <a>
-                            <a th:href="@{'/users/' + ${user.id} + '/profile'}">
-                                <p>Profile</p>
-                            </a>
+<!--<main>-->
+<!--    <div class="nav-bar">-->
+<!--        <div class="top-bar-container">-->
+<!--            <nav>-->
+<!--                <div class="top-navbar">-->
+<!--                    <div class="my-chill-zone-nav-bar">-->
+<!--                        <div class="my-chill-zone-logo">MyChill</div>-->
+<!--                        <div class="my-chill-zone-logo-under">Zone</div>-->
+<!--                    </div>-->
+<!--                    <div class="func-block">-->
+<!--                        <a th:href="@{/home}">-->
+<!--                            <p>Home</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/movies}">-->
+<!--                            <p>Movies</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/movies/favourites}">-->
+<!--                            <p>Favourite Movies</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/movies/liked}">-->
+<!--                            <p>Most Liked Movies</p>-->
+<!--                        </a>-->
+<!--                        <a>-->
+<!--                            <a th:href="@{'/users/' + ${user.id} + '/profile'}">-->
+<!--                                <p>Profile</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/subscriptions}">
-                                <p>Upgrade Plan</p>
-                            </a>
+<!--                            <a th:href="@{/subscriptions}">-->
+<!--                                <p>Upgrade Plan</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/wallet}">
-                                <p>Wallet</p>
-                            </a>
+<!--                            <a th:href="@{/wallet}">-->
+<!--                                <p>Wallet</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/transactions}">
-                                <p>Transactions</p>
-                            </a>
+<!--                            <a th:href="@{/transactions}">-->
+<!--                                <p>Transactions</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/subscriptions/history}">
-                                <p>Subscription History</p>
-                            </a>
-                        </a>
+<!--                            <a th:href="@{/subscriptions/history}">-->
+<!--                                <p>Subscription History</p>-->
+<!--                            </a>-->
+<!--                        </a>-->
 
-                        <a th:href="@{/notifications}">
-                            <p>Notification</p>
-                        </a>
+<!--                        <a th:href="@{/notifications}">-->
+<!--                            <p>Notification</p>-->
+<!--                        </a>-->
 
-                        <a th:href="@{/contacts}">
-                            <p>Contacts</p>
-                        </a>
-                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
-                            <p>Users</p>
-                        </a>
-                    </div>
-                </div>
-            </nav>
+<!--                        <a th:href="@{/contacts}">-->
+<!--                            <p>Contacts</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">-->
+<!--                            <p>Users</p>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </nav>-->
 
-            <div class="logout">
-                <a th:href="@{/logout}" class="button logout">Logout</a>
-            </div>
-        </div>
-    </div>
+<!--            <div class="logout">-->
+<!--                <a th:href="@{/logout}" class="button logout">Logout</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!--  Contact Us -->
+<!--    &lt;!&ndash;  Contact Us &ndash;&gt;-->
 
-    <!-- Payment Result Section -->
-    <div class="home-section">
-        <div class="single-section-box payment-result-container">
-            <!-- Success Message -->
-            <div th:if="${transaction.status.name() == 'SUCCEEDED'}" class="payment-box success" >
-                <div class="payment-header">
-                    <div class="icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 6L9 17L4 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                    <h2>Payment Successful!</h2>
-                    <p>Thank you for upgrading your plan. Enjoy unlimited streaming with MyChillZone!</p>
-                </div>
-                <div class="payment-details">
-                    <div class="details">
-                        <span class="item">Subscription:</span>
-                        <span class="value" th:text="${user.subscriptions.get(0).type}"></span>
-                    </div>
-                    <div class="details">
-                        <span class="item">Price:</span>
-                        <span class="value" th:text="${transaction.amount} + ' EUR/month'"></span>
-                    </div>
-                    <div class="details">
-                        <span class="item">Start Date:</span>
-                        <span class="value" th:text="${#temporals.format(user.subscriptions.get(0).createdOn, 'dd MMM YYYY HH:mm')}">December 30, 2024</span>
-                    </div>
-                </div>
-            </div>
-
-
-                        <div th:if="${transaction.status.name() == 'FAILED'}" class="payment-box failure">
-                            <div class="payment-header">
-                                <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                                </div>
-                                <h2>Payment Failed</h2>
-                                <p>Unfortunately, your payment could not be processed. Please try again or contact support if the
-                                    issue persists.</p>
-                                </div>
-                            <div class="payment-details">
-                                <div class="details">
-                                    <span class="item">Subscription:</span>
-                                    <span class="value" th:text="${user.subscriptions.get(0).type}"></span>
-                                </div>
-                                  <div class="details">
-                                    <span class="item">Reason:</span>
-                                    <span class="value">Insufficient funds, top up your account</span>
-                                  </div>
-                                </div>
-                        </div>
+<!--    &lt;!&ndash; Payment Result Section &ndash;&gt;-->
+<!--    <div class="home-section">-->
+<!--        <div class="single-section-box payment-result-container">-->
+<!--            &lt;!&ndash; Success Message &ndash;&gt;-->
+<!--            <div th:if="${transaction.status.name() == 'SUCCEEDED'}" class="payment-box success" >-->
+<!--                <div class="payment-header">-->
+<!--                    <div class="icon">-->
+<!--                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                            <path d="M20 6L9 17L4 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <h2>Payment Successful!</h2>-->
+<!--                    <p>Thank you for upgrading your plan. Enjoy unlimited streaming with MyChillZone!</p>-->
+<!--                </div>-->
+<!--                <div class="payment-details">-->
+<!--                    <div class="details">-->
+<!--                        <span class="item">Subscription:</span>-->
+<!--                        <span class="value" th:text="${user.subscriptions.get(0).type}"></span>-->
+<!--                    </div>-->
+<!--                    <div class="details">-->
+<!--                        <span class="item">Price:</span>-->
+<!--                        <span class="value" th:text="${transaction.amount} + ' EUR/month'"></span>-->
+<!--                    </div>-->
+<!--                    <div class="details">-->
+<!--                        <span class="item">Start Date:</span>-->
+<!--                        <span class="value" th:text="${#temporals.format(user.subscriptions.get(0).createdOn, 'dd MMM YYYY HH:mm')}">December 30, 2024</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
 
-            <div class="details-section">
-                <div class="details-section-container">
-                    <strong>Transaction ID:</strong>
-                    <p th:text="${transaction.id}"></p>
-                </div>
-            </div>
+<!--                        <div th:if="${transaction.status.name() == 'FAILED'}" class="payment-box failure">-->
+<!--                            <div class="payment-header">-->
+<!--                                <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                    <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>-->
+<!--                                </svg>-->
+<!--                                </div>-->
+<!--                                <h2>Payment Failed</h2>-->
+<!--                                <p>Unfortunately, your payment could not be processed. Please try again or contact support if the-->
+<!--                                    issue persists.</p>-->
+<!--                                </div>-->
+<!--                            <div class="payment-details">-->
+<!--                                <div class="details">-->
+<!--                                    <span class="item">Subscription:</span>-->
+<!--                                    <span class="value" th:text="${user.subscriptions.get(0).type}"></span>-->
+<!--                                </div>-->
+<!--                                  <div class="details">-->
+<!--                                    <span class="item">Reason:</span>-->
+<!--                                    <span class="value">Insufficient funds, top up your account</span>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                        </div>-->
 
-            <!-- Go Back Button -->
-            <a th:href="@{/home}" class="profile-actions-button">
-                <p>Back to Home</p>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 7H14C17.3137 7 20 9.68629 20 13C20 16.3137 17.3137 19 14 19H4M4 7L8 3M4 7L8 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-            </a>
-        </div>
-    </div>
 
-</main>
-<div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
-</body>
-</html>
+<!--            <div class="details-section">-->
+<!--                <div class="details-section-container">-->
+<!--                    <strong>Transaction ID:</strong>-->
+<!--                    <p th:text="${transaction.id}"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Go Back Button &ndash;&gt;-->
+<!--            <a th:href="@{/home}" class="profile-actions-button">-->
+<!--                <p>Back to Home</p>-->
+<!--                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                    <path d="M4 7H14C17.3137 7 20 9.68629 20 13C20 16.3137 17.3137 19 14 19H4M4 7L8 3M4 7L8 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>-->
+<!--                </svg>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</main>-->
+<!--<div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>-->
+<!--</body>-->
+<!--</html>-->

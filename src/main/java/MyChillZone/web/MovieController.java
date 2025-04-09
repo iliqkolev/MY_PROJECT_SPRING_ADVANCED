@@ -24,6 +24,9 @@ public class MovieController {
     private final MovieRepository movieRepository;
     private final MovieService movieService;
 
+    public static final List<Genre> DEFAULT_GENRE_ORDER = List.of(Genre.ACTION, Genre.COMEDY, Genre.HORROR, Genre.FANTASY);
+
+
     @Autowired
     public MovieController(UserService userService, MovieRepository movieRepository, MovieService movieService) {
         this.userService = userService;
@@ -37,19 +40,7 @@ public class MovieController {
         UUID userId = authenticationMetadata.getUserId();
         User user = userService.getById(userId);
 
-        List<Genre> genreOrder = List.of(Genre.ACTION, Genre.COMEDY, Genre.HORROR, Genre.FANTASY);
-
-        Map<Genre, List<Movie>> grouped = movieService.getAllMovies()
-                .stream()
-                .collect(Collectors.groupingBy(Movie::getGenre));
-
-        // Подреждаме по custom ред
-        Map<Genre, List<Movie>> moviesByGenre = new LinkedHashMap<>();
-        for (Genre genre : genreOrder) {
-            if (grouped.containsKey(genre)) {
-                moviesByGenre.put(genre, grouped.get(genre));
-            }
-        }
+        Map<Genre, List<Movie>> moviesByGenre = movieService.getMoviesGroupedByGenre(DEFAULT_GENRE_ORDER);
 
         ModelAndView modelAndView = new ModelAndView("movies");
         modelAndView.addObject("user", user);
@@ -65,21 +56,7 @@ public class MovieController {
         User user = userService.getById(userId);
 
         List<Movie> favMovies = user.getFavouriteMovies();
-
-        List<Genre> genreOrder = List.of(Genre.ACTION, Genre.COMEDY, Genre.HORROR, Genre.FANTASY);
-
-        Map<Genre, List<Movie>> favouriteMovies = favMovies
-                .stream()
-                .collect(Collectors.groupingBy(Movie::getGenre));
-
-        // Подреждаме по custom ред
-        Map<Genre, List<Movie>> sortedFavByGenre = new LinkedHashMap<>();
-
-        for (Genre genre : genreOrder) {
-            if (favouriteMovies.containsKey(genre)) {
-                sortedFavByGenre.put(genre, favouriteMovies.get(genre));
-            }
-        }
+        Map<Genre, List<Movie>> sortedFavByGenre = movieService.groupMoviesByFavourite(favMovies, DEFAULT_GENRE_ORDER);
 
         ModelAndView modelAndView = new ModelAndView("favourite-movies");
         modelAndView.addObject("user", user);
@@ -88,28 +65,14 @@ public class MovieController {
         return modelAndView;
     }
 
-    @Transactional
+
     @GetMapping("/liked")
     public ModelAndView getMostLikedMoviesPage(@AuthenticationPrincipal AuthenticationMetadata auth){
 
         UUID userId = auth.getUserId();
         User user = userService.getById(userId);
 
-        List<Movie> likedMovies = user.getLikedMovies();
-
-        List<Genre> genreOrder = List.of(Genre.ACTION, Genre.COMEDY, Genre.HORROR, Genre.FANTASY);
-
-        Map<Genre, List<Movie>> likedByGenre = likedMovies
-                .stream()
-                .collect(Collectors.groupingBy(Movie::getGenre));
-
-        Map<Genre, List<Movie>> sortedLikedByGenre  = new LinkedHashMap<>();
-
-        for (Genre genre : genreOrder) {
-            if (likedByGenre.containsKey(genre)) {
-                sortedLikedByGenre.put(genre, likedByGenre.get(genre));
-            }
-        }
+        Map<Genre, List<Movie>> sortedLikedByGenre = movieService.getTop3LikedMoviesByGenre();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("liked-movies");

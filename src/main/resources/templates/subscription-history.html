@@ -1,117 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/subscription-history.css">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/subscription-history.css">-->
 
 
-    <title>Subscription History</title>
-</head>
-<body>
+<!--    <title>Subscription History</title>-->
+<!--</head>-->
+<!--<body>-->
 
-<main>
-    <div class="nav-bar">
-        <div class="top-bar-container">
-            <nav>
-                <div class="top-navbar">
-                    <div class="my-chill-zone-nav-bar">
-                        <div class="my-chill-zone-logo">MyChill</div>
-                        <div class="my-chill-zone-logo-under">Zone</div>
-                    </div>
-                    <div class="func-block">
-                        <a th:href="@{/home}">
-                            <p>Home</p>
-                        </a>
-                        <a th:href="@{/movies}">
-                            <p>Movies</p>
-                        </a>
-                        <a th:href="@{/movies/favourites}">
-                            <p>Favourite Movies</p>
-                        </a>
-                        <a th:href="@{/movies/liked}">
-                            <p>Most Liked Movies</p>
-                        </a>
-                        <a>
-                            <a th:href="@{'/users/' + ${user.id} + '/profile'}">
-                                <p>Profile</p>
-                            </a>
+<!--<main>-->
+<!--    <div class="nav-bar">-->
+<!--        <div class="top-bar-container">-->
+<!--            <nav>-->
+<!--                <div class="top-navbar">-->
+<!--                    <div class="my-chill-zone-nav-bar">-->
+<!--                        <div class="my-chill-zone-logo">MyChill</div>-->
+<!--                        <div class="my-chill-zone-logo-under">Zone</div>-->
+<!--                    </div>-->
+<!--                    <div class="func-block">-->
+<!--                        <a th:href="@{/home}">-->
+<!--                            <p>Home</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/movies}">-->
+<!--                            <p>Movies</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/movies/favourites}">-->
+<!--                            <p>Favourite Movies</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/movies/liked}">-->
+<!--                            <p>Most Liked Movies</p>-->
+<!--                        </a>-->
+<!--                        <a>-->
+<!--                            <a th:href="@{'/users/' + ${user.id} + '/profile'}">-->
+<!--                                <p>Profile</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/subscriptions}">
-                                <p>Upgrade Plan</p>
-                            </a>
+<!--                            <a th:href="@{/subscriptions}">-->
+<!--                                <p>Upgrade Plan</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/wallet}">
-                                <p>Wallet</p>
-                            </a>
+<!--                            <a th:href="@{/wallet}">-->
+<!--                                <p>Wallet</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/transactions}">
-                                <p>Transactions</p>
-                            </a>
+<!--                            <a th:href="@{/transactions}">-->
+<!--                                <p>Transactions</p>-->
+<!--                            </a>-->
 
-                            <a th:href="@{/subscriptions/history}">
-                                <p>Subscription History</p>
-                            </a>
-                        </a>
+<!--                            <a th:href="@{/subscriptions/history}">-->
+<!--                                <p>Subscription History</p>-->
+<!--                            </a>-->
+<!--                        </a>-->
 
-                        <a th:href="@{/notifications}">
-                            <p>Notification</p>
-                        </a>
+<!--                        <a th:href="@{/notifications}">-->
+<!--                            <p>Notification</p>-->
+<!--                        </a>-->
 
-                        <a th:href="@{/contacts}">
-                            <p>Contacts</p>
-                        </a>
-                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">
-                            <p>Users</p>
-                        </a>
-                    </div>
-                </div>
-            </nav>
+<!--                        <a th:href="@{/contacts}">-->
+<!--                            <p>Contacts</p>-->
+<!--                        </a>-->
+<!--                        <a th:href="@{/users}" th:if="${user.getUserRole().name() == 'ADMIN'}">-->
+<!--                            <p>Users</p>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </nav>-->
 
-            <div class="logout">
-                <a th:href="@{/logout}" class="button logout">Logout</a>
-            </div>
-        </div>
-    </div>
+<!--            <div class="logout">-->
+<!--                <a th:href="@{/logout}" class="button logout">Logout</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!--  Subscription History -->
+<!--    &lt;!&ndash;  Subscription History &ndash;&gt;-->
 
-    <div class="home-section">
-        <div class="single-section-box subscriptions-container">
-            <table class="styled-table">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Period</th>
-                    <th>Price</th>
-                    <th>Effective from</th>
-                    <th>Effective to</th>
-                </tr>
-                </thead>
-                <tbody>
-                                <tr th:each="subscription : ${user.subscriptions}">
-                                    <td th:text="${subscription.id}"></td>
-                                    <td>
-                                        <p th:text="${subscription.type}"></p>
-                                    </td>
-                                    <td>
-                                        <p th:if="${subscription.status.name() == 'ACTIVE'}" class="status active">ACTIVE</p>
-                                        <p th:if="${subscription.status.name() == 'COMPLETED'}" class="status completed">COMPLETED</p>
-                                        <p th:if="${subscription.status.name() == 'TERMINATED'}" class="status terminated">TERMINATED</p>
-                                    </td>
-                                    <td th:text="${subscription.period}"></td>
-                                    <td th:text="${subscription.price + ' EUR'}"></td>
-                                    <td th:text="${#temporals.format(subscription.createdOn, 'dd MMM YYYY HH:mm')}"></td>
-                                    <td th:text="${#temporals.format(subscription.completedOn, 'dd MMM YYYY HH:mm')}"></td>
-                                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<!--    <div class="home-section">-->
+<!--        <div class="single-section-box subscriptions-container">-->
+<!--            <table class="styled-table">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>Id</th>-->
+<!--                    <th>Type</th>-->
+<!--                    <th>Status</th>-->
+<!--                    <th>Period</th>-->
+<!--                    <th>Price</th>-->
+<!--                    <th>Effective from</th>-->
+<!--                    <th>Effective to</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                                <tr th:each="subscription : ${user.subscriptions}">-->
+<!--                                    <td th:text="${subscription.id}"></td>-->
+<!--                                    <td>-->
+<!--                                        <p th:text="${subscription.type}"></p>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <p th:if="${subscription.status.name() == 'ACTIVE'}" class="status active">ACTIVE</p>-->
+<!--                                        <p th:if="${subscription.status.name() == 'COMPLETED'}" class="status completed">COMPLETED</p>-->
+<!--                                        <p th:if="${subscription.status.name() == 'TERMINATED'}" class="status terminated">TERMINATED</p>-->
+<!--                                    </td>-->
+<!--                                    <td th:text="${subscription.period}"></td>-->
+<!--                                    <td th:text="${subscription.price + ' EUR'}"></td>-->
+<!--                                    <td th:text="${#temporals.format(subscription.createdOn, 'dd MMM YYYY HH:mm')}"></td>-->
+<!--                                    <td th:text="${#temporals.format(subscription.completedOn, 'dd MMM YYYY HH:mm')}"></td>-->
+<!--                                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
 
 
-    <div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>
-</main>
-</body>
-</html>
+<!--    <div class="footer"><p>© 2025 MyChillZone. All rights reserved.</p></div>-->
+<!--</main>-->
+<!--</body>-->
+<!--</html>-->

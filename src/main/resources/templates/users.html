@@ -27,27 +27,12 @@
                         <a th:href="@{/movies/liked}">
                             <p>Most Liked Movies</p>
                         </a>
-                        <a>
-                            <a th:href="@{'/users/' + ${user.id} + '/profile'}">
-                                <p>Profile</p>
-                            </a>
-
-                            <a th:href="@{/subscriptions}">
-                                <p>Upgrade Plan</p>
-                            </a>
-
-                            <a th:href="@{/wallet}">
-                                <p>Wallet</p>
-                            </a>
-
-                            <a th:href="@{/transactions}">
-                                <p>Transactions</p>
-                            </a>
-
-                            <a th:href="@{/subscriptions/history}">
-                                <p>Subscription History</p>
-                            </a>
+                        <a th:href="@{'/users/' + ${user.id} + '/profile'}">
+                            <p>Profile</p>
                         </a>
+
+
+
 
                         <a th:href="@{/notifications}">
                             <p>Notification</p>

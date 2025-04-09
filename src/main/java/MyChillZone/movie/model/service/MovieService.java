@@ -32,11 +32,7 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public List<Movie> getMostLikedMovies() {
-        return movieRepository.findAll().stream()
-                .filter(movie -> movie.getLikes() > 0)
-                .collect(Collectors.toList());
-    }
+
 
     public Map<Genre, List<Movie>> getMoviesGroupedByGenre(List<Genre> genreOrder) {
         List<Movie> movies = getAllMovies();
@@ -68,19 +64,6 @@ public class MovieService {
         return ordered;
     }
 
-    public Map<Genre, List<Movie>> groupMoviesByLiked(List<Movie> likedMovies, List<Genre> genreOrder) {
-        Map<Genre, List<Movie>> grouped = likedMovies.stream()
-                .collect(Collectors.groupingBy(Movie::getGenre));
-
-        Map<Genre, List<Movie>> ordered = new LinkedHashMap<>();
-        for (Genre genre : genreOrder) {
-            if (grouped.containsKey(genre)) {
-                ordered.put(genre, grouped.get(genre));
-            }
-        }
-
-        return ordered;
-    }
 
     public Map<Genre, List<Movie>> getTop3LikedMoviesByGenre() {
         // Вземаме всички филми с поне 1 лайк
@@ -136,10 +119,6 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
-    public int getLikesCount(UUID movieId){
-        Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
-        return movie.getLikes();
-    }
 
     public void removeFavouriteMovie(UUID favouriteMovieId, UUID userId) {
 

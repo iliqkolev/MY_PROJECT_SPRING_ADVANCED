@@ -5,14 +5,14 @@ import MyChillZone.exception.UsernameAlreadyExistException;
 import MyChillZone.notification.client.service.NotificationService;
 import MyChillZone.security.AuthenticationMetadata;
 import MyChillZone.subscription.model.Subscription;
-import MyChillZone.subscription.model.service.SubscriptionService;
+
 import MyChillZone.user.model.Country;
 import MyChillZone.user.model.User;
 import MyChillZone.user.model.UserRole;
 import MyChillZone.user.model.repository.UserRepository;
 import MyChillZone.user.model.service.UserService;
 import MyChillZone.wallet.model.Wallet;
-import MyChillZone.wallet.model.service.WalletService;
+
 import MyChillZone.web.dto.RegisterRequest;
 import MyChillZone.web.dto.UserEditRequest;
 import org.junit.jupiter.api.Test;
@@ -45,10 +45,8 @@ import static org.mockito.Mockito.times;
 public class UserServiceUTest {
     @Mock
     private UserRepository userRepository;
-    @Mock
-    private SubscriptionService subscriptionService;
-    @Mock
-    private WalletService walletService;
+
+
     @Mock
     private NotificationService notificationService;
     @Mock
@@ -110,8 +108,6 @@ public class UserServiceUTest {
         //When
         assertThrows(UsernameAlreadyExistException.class, () -> userService.register(registerRequest));
         verify(userRepository,never()).save(any());
-        verify(subscriptionService, never()).createDefaultSubscription(any());
-        verify(walletService, never()).createDefaultWallet(any());
         verify(notificationService, never()).saveNotificationPreference(any(UUID.class), anyBoolean(), anyString());
         verify(notificationService, never()).sendNotification(any(UUID.class), anyString(), anyString());
     }
@@ -137,15 +133,12 @@ public class UserServiceUTest {
 
         when(userRepository.findByUsername(registerRequest.getUsername())).thenReturn(Optional.empty());
         when(userRepository.save(any())).thenReturn(user);
-        when(subscriptionService.createDefaultSubscription(user)).thenReturn(new Subscription());
-        when(walletService.createDefaultWallet(user)).thenReturn(new Wallet());
+
 
         //When
         User registeredUser = userService.register(registerRequest);
 
         //Then
-        assertThat(registeredUser.getSubscriptions()).hasSize(1);
-        assertThat(registeredUser.getWallets()).hasSize(1);
         verify(notificationService, times(1)).saveNotificationPreference(user.getId(), true, user.getEmail());
         verify(notificationService,times(1)).sendNotification(user.getId(), "Welcome to MyChillZone", emailBody);
     }

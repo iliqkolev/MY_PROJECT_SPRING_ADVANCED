@@ -1,7 +1,8 @@
 package MyChillZone.web;
 
+import MyChillZone.category.model.service.CategoryService;
+import MyChillZone.movie.model.Genre;
 import MyChillZone.movie.model.Movie;
-import MyChillZone.search.model.service.SearchService;
 import MyChillZone.security.AuthenticationMetadata;
 import MyChillZone.user.model.User;
 import MyChillZone.user.model.service.UserService;
@@ -16,46 +17,50 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/search")
-public class SearchController {
+@RequestMapping("/category")
+public class CategoryController {
 
-    private final SearchService searchService;
+    private final CategoryService categoryService;
+
     private final UserService userService;
 
     @Autowired
-    public SearchController(SearchService searchService, UserService userService) {
-        this.searchService = searchService;
+    public CategoryController(CategoryService categoryService, UserService userService) {
+        this.categoryService = categoryService;
         this.userService = userService;
     }
 
     @GetMapping
-    public ModelAndView getSearchPage(@AuthenticationPrincipal AuthenticationMetadata a){
+    public ModelAndView getCategoryPage(@AuthenticationPrincipal AuthenticationMetadata a){
 
         User user = userService.getById(a.getUserId());
 
-        ModelAndView modelAndView = new ModelAndView("search");
+        ModelAndView modelAndView = new ModelAndView("category");
         modelAndView.addObject("user", user);
 
         return modelAndView;
     }
 
     @GetMapping("/results")
-    public  ModelAndView searchMovie(@RequestParam("movie") String movie, @AuthenticationPrincipal AuthenticationMetadata a) {
+    public ModelAndView findMoviesByCategory(@RequestParam("category") Genre category, @AuthenticationPrincipal AuthenticationMetadata a){
+
         User user = userService.getById(a.getUserId());
 
-        List<Movie> searchResults = searchService.searchMovie(movie);
+        List<Movie> searchResults = categoryService.findMoviesByCategory(Genre.valueOf(String.valueOf(category)));
 
-        ModelAndView modelAndView = new ModelAndView("search");
-        if (searchResults.isEmpty()) {
-            modelAndView.addObject("message", "No movies found for your search.");
-        } else {
-            modelAndView.addObject("searchResults", searchResults);
-        }
-        modelAndView.addObject("movie", movie);
+        ModelAndView modelAndView = new ModelAndView("category");
+        modelAndView.addObject("searchResults", searchResults);
+        modelAndView.addObject("category", category);
         modelAndView.addObject("user", user);
 
         return modelAndView;
     }
+
+
+
+
+
+
 
 
 }

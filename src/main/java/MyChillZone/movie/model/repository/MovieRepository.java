@@ -14,8 +14,7 @@ public interface MovieRepository extends JpaRepository<Movie, UUID> {
 
     List<Movie> findByTitleContainingIgnoreCase(String title);
 
-    Optional<Movie> findByTitleAndGenre(String title, Genre genre);
-
+    List<Movie> findByGenre(Genre genre);
 
 
 }

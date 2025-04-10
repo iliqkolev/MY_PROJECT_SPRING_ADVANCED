@@ -6,7 +6,11 @@ import MyChillZone.movie.model.repository.MovieRepository;
 import MyChillZone.user.model.User;
 import MyChillZone.user.model.repository.UserRepository;
 import MyChillZone.user.model.service.UserService;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
@@ -15,6 +19,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
@@ -28,12 +33,14 @@ public class MovieService {
         this.userService = userService;
     }
 
+    @Cacheable("movies")
     public List<Movie> getAllMovies() {
+        log.info("Fetching movies from database...");
         return movieRepository.findAll();
     }
 
 
-
+    @Cacheable("moviesGroupedByGenre")
     public Map<Genre, List<Movie>> getMoviesGroupedByGenre(List<Genre> genreOrder) {
         List<Movie> movies = getAllMovies();
 
@@ -95,6 +102,7 @@ public class MovieService {
                 .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
     }
 
+    @CacheEvict(value = "movies", key = "'allMovies'")
     public void addMovieToFavourites(UUID movieId, UUID userId) {
 
         User user = userService.getById(userId);
@@ -106,6 +114,7 @@ public class MovieService {
         }
     }
 
+    @CacheEvict(value = {"movies", "moviesGroupedByGenre"}, allEntries = true)
     public void addMovieToLikes(UUID movieId, UUID userId) {
         User user = userService.getById(userId);
         Movie movie = getById(movieId);
@@ -119,7 +128,7 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
-
+    @CacheEvict(value = "movies", allEntries = true)
     public void removeFavouriteMovie(UUID favouriteMovieId, UUID userId) {
 
         User user = userRepository.findById(userId)

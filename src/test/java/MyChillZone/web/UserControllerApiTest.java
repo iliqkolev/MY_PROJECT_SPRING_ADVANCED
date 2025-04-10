@@ -1,11 +1,14 @@
 package MyChillZone.web;
 
-import MyChillZone.exception.DomainException;
 import MyChillZone.security.AuthenticationMetadata;
+import MyChillZone.user.model.Country;
 import MyChillZone.user.model.User;
 import MyChillZone.user.model.UserRole;
 import MyChillZone.user.model.service.UserService;
+import MyChillZone.web.dto.UserEditRequest;
+import MyChillZone.web.mapper.DtoMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -27,6 +30,7 @@ public class UserControllerApiTest {
 
     @MockitoBean
     private UserService userService;
+
 
     @Autowired
     private MockMvc mockMvc;
@@ -93,49 +97,6 @@ public class UserControllerApiTest {
 
         verify(userService, times(0)).switchStatus(any());
     }
-
-    //PROFILE MENU
-//    @Test
-//    void testGetProfileMenu() throws Exception {
-//        // Потребителски ID за теста
-//        UUID userId = UUID.randomUUID();
-//
-//        // Мокваме потребителските данни
-//        User mockUser = new User();
-//        mockUser.setId(userId);
-//        mockUser.setUsername("testUser");
-//        mockUser.setEmail("test@example.com");
-//
-//        // Мокваме UserService да върне същия потребител
-//        when(userService.getById(userId)).thenReturn(mockUser);
-//
-//        // Създаваме GET заявка за профила на потребителя
-//        MockHttpServletRequestBuilder request = get("/users/{id}/profile", userId);
-//
-//        // Изпълняваме заявката и проверяваме резултатите
-//        mockMvc.perform(request)
-//                .andExpect(status().isOk())  // Статус код 200 OK
-//                .andExpect(view().name("profile-menu"))  // Проверяваме името на изгледа
-//                .andExpect(model().attributeExists("user"))  // Проверяваме дали потребителят е добавен в модела
-//                .andExpect(model().attributeExists("userEditRequest"));  // Проверяваме дали обектът за редактиране на потребител е добавен в модела
-//    }
-//
-//    @Test
-//    void testGetProfileMenu_UserNotFound() throws Exception {
-//        // Потребителски ID за теста
-//        UUID userId = UUID.randomUUID();
-//
-//        // Мокваме UserService да хвърли DomainException, ако потребителят не е намерен
-//        when(userService.getById(userId)).thenThrow(new DomainException("User with id [%s] does not exist".formatted(userId)));
-//
-//        // Създаваме GET заявка за профила на потребителя
-//        MockHttpServletRequestBuilder request = get("/users/{id}/profile", userId);
-//
-//        // Изпълняваме заявката и проверяваме резултатите
-//        mockMvc.perform(request)
-//                .andExpect(status().isNotFound())  // Статус код 404 Not Found
-//                .andExpect(view().name("not-found"));  // Очакваме изглед "not-found"
-//    }
 
 
 

@@ -4,14 +4,14 @@ import MyChillZone.exception.DomainException;
 import MyChillZone.exception.UsernameAlreadyExistException;
 import MyChillZone.notification.client.service.NotificationService;
 import MyChillZone.security.AuthenticationMetadata;
-import MyChillZone.subscription.model.Subscription;
+
 
 import MyChillZone.user.model.Country;
 import MyChillZone.user.model.User;
 import MyChillZone.user.model.UserRole;
 import MyChillZone.user.model.repository.UserRepository;
 import MyChillZone.user.model.service.UserService;
-import MyChillZone.wallet.model.Wallet;
+
 
 import MyChillZone.web.dto.RegisterRequest;
 import MyChillZone.web.dto.UserEditRequest;

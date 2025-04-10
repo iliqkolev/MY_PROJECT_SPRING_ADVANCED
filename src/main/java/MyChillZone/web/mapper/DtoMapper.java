@@ -3,8 +3,9 @@ package MyChillZone.web.mapper;
 import MyChillZone.user.model.User;
 import MyChillZone.web.dto.UserEditRequest;
 import lombok.experimental.UtilityClass;
+import org.springframework.stereotype.Component;
 
-@UtilityClass
+@Component
 public class DtoMapper {
 
     public static UserEditRequest mapUserToUserEditRequest(User user){

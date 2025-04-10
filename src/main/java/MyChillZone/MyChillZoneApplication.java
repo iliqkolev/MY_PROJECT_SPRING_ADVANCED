@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableScheduling
 @EnableFeignClients
+@EnableCaching
 @EnableAsync
 public class MyChillZoneApplication {
 
